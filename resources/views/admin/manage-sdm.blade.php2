@@ -1,0 +1,274 @@
+@extends('admin.layout')
+
+@section('content')
+
+<div class="container">
+    <h2>SDM</h2>
+    <form action="{{ route('manage-sdm.store') }}" method="POST">
+        @csrf
+        <!-- Personal Section -->
+        <h3>Personal</h3>
+        <div class="form-group">
+            <label for="kategori_sdm">Kategori SDM</label>
+            <select name="kategori_sdm" id="kategori_sdm" class="form-control">
+                @foreach($roles as $role)
+                    <option value="{{ $role->name }}">{{ $role->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nama_lengkap">Nama Lengkap</label>
+            <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="nama_panggilan">Nama Panggilan</label>
+            <input type="text" name="nama_panggilan" id="nama_panggilan" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="peran">Peran</label>
+            <select name="peran" id="peran" class="form-control">
+                <option value="Anak">Anak</option>
+                <option value="Kepala keluarga">Kepala keluarga</option>
+                <option value="Ibu rumah tangga">Ibu rumah tangga</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="jenis_identitas">Jenis Identitas</label>
+            <select name="jenis_identitas" id="jenis_identitas" class="form-control">
+                <option value="KTP">KTP</option>
+                <option value="SIM">SIM</option>
+                <option value="Paspor">Paspor</option>
+                <option value="Kartu Pelajar">Kartu Pelajar</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nomor_identitas">Nomor Identitas</label>
+            <input type="text" name="nomor_identitas" id="nomor_identitas" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="tempat_tanggal_lahir">Tempat Tanggal Lahir</label>
+            <input type="text" name="tempat_tanggal_lahir" id="tempat_tanggal_lahir" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="golongan_darah">Golongan Darah</label>
+            <select name="golongan_darah" id="golongan_darah" class="form-control">
+                <option value="O+">O</option>
+                <option value="O-">O-</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="suku">Suku</label>
+            <input type="text" name="suku" id="suku" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="status_pernikahan">status_pernikahan</label>
+            <select name="status_pernikahan" id="status_pernikahan" class="form-control">
+                <option value="Belum Menikah">Belum Menikah</option>
+                <option value="Menikah">Menikah</option>
+                <option value="Cerai">Cerai</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="status_sdm">status_sdm</label>
+            <select name="status_sdm" id="status_sdm" class="form-control">
+                <option value="Aktif">Aktif</option>
+                <option value="Tidak Aktif">Tidak Aktif</option>
+            </select>
+        </div>
+
+        <!-- Add other fields for Personal -->
+
+        <!-- Rekening Pribadi Section -->
+        <h3>Data Rekening Pribadi</h3>
+        <div class="form-group">
+            <label for="rekening_pribadi[nama_bank]">Nama Bank</label>
+            <input type="text" name="rekening_pribadi[nama_bank]" id="rekening_pribadi[nama_bank]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="rekening_pribadi[no_rekening]">No Rekening</label>
+            <input type="text" name="rekening_pribadi[no_rekening]" id="rekening_pribadi[no_rekening]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="rekening_pribadi[atas_nama]">Atas Nama</label>
+            <input type="text" name="rekening_pribadi[atas_nama]" id="rekening_pribadi[atas_nama]" class="form-control">
+        </div>
+
+        <!-- Tempat Tinggal Section -->
+        <h3>Tempat Tinggal - Sesuai KTP</h3>
+        <div class="form-group">
+            <label for="tempat_tinggal_ktp[alamat]">Alamat</label>
+            <input type="text" name="tempat_tinggal_ktp[alamat]" id="tempat_tinggal_ktp[alamat]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_ktp[negara]">negara</label>
+            <input type="text" name="tempat_tinggal_ktp[negara]" id="tempat_tinggal_ktp[negara]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_ktp[provinsi]">provinsi</label>
+            <input type="text" name="tempat_tinggal_ktp[provinsi]" id="tempat_tinggal_ktp[provinsi]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_ktp[kota]">kota</label>
+            <input type="text" name="tempat_tinggal_ktp[kota]" id="tempat_tinggal_ktp[kota]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_ktp[kecamatan]">kecamatan</label>
+            <input type="text" name="tempat_tinggal_ktp[kecamatan]" id="tempat_tinggal_ktp[kecamatan]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_ktp[kelurahan]">kelurahan</label>
+            <input type="text" name="tempat_tinggal_ktp[kelurahan]" id="tempat_tinggal_ktp[kelurahan]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_ktp[rt_rw]">RT/RW</label>
+            <input type="text" name="tempat_tinggal_ktp[rt_rw]" id="tempat_tinggal_ktp[rt_rw]" class="form-control">
+        </div>
+
+        <!-- Add other fields for Tempat Tinggal -->
+
+        <h3>Tempat Tinggal - Sekarang</h3>
+        <div class="form-group">
+            <label for="tempat_tinggal_sekarang[alamat]">Alamat</label>
+            <input type="text" name="tempat_tinggal_sekarang[alamat]" id="tempat_tinggal_sekarang[alamat]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_sekarang[negara]">Negara</label>
+            <input type="text" name="tempat_tinggal_sekarang[negara]" id="tempat_tinggal_sekarang[negara]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_sekarang[provinsi]">Provinsi</label>
+            <input type="text" name="tempat_tinggal_sekarang[provinsi]" id="tempat_tinggal_sekarang[provinsi]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_sekarang[kota]">Kota</label>
+            <input type="text" name="tempat_tinggal_sekarang[kota]" id="tempat_tinggal_sekarang[kota]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_sekarang[kecamatan]">Kecamatan</label>
+            <input type="text" name="tempat_tinggal_sekarang[kecamatan]" id="tempat_tinggal_sekarang[kecamatan]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_sekarang[kelurahan]">Kelurahan</label>
+            <input type="text" name="tempat_tinggal_sekarang[kelurahan]" id="tempat_tinggal_sekarang[kelurahan]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tempat_tinggal_sekarang[rt_rw]">RT/RW</label>
+            <input type="text" name="tempat_tinggal_sekarang[rt_rw]" id="tempat_tinggal_sekarang[rt_rw]" class="form-control">
+        </div>
+
+
+        <h3>Lokasi Pelayanan</h3>
+        <div class="form-group">
+            <label for="lokasi_pelayanan">Lokasi Pelayanan</label>
+            <input type="text" name="lokasi_pelayanan" id="lokasi_pelayanan" class="form-control">
+        </div>
+
+        <!-- Kontak & Medsos Section -->
+        <h3>Kontak & Medsos</h3>
+        <div class="form-group">
+            <label for="kontak_medsos[no_hp1]">No HP 1</label>
+            <input type="text" name="kontak_medsos[no_hp1]" id="kontak_medsos[no_hp1]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="kontak_medsos[no_hp2]">No HP 2</label>
+            <input type="text" name="kontak_medsos[no_hp2]" id="kontak_medsos[no_hp2]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="kontak_medsos[email_1]">Email 1</label>
+            <input type="text" name="kontak_medsos[email_1]" id="kontak_medsos[email_1]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="kontak_medsos[email_2]">Email 2</label>
+            <input type="text" name="kontak_medsos[email_2]" id="kontak_medsos[email_2]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="kontak_medsos[instagram]">Instagram</label>
+            <input type="text" name="kontak_medsos[instagram]" id="kontak_medsos[instagram]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="kontak_medsos[tiktok]">Tiktok</label>
+            <input type="text" name="kontak_medsos[tiktok]" id="kontak_medsos[tiktok]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="kontak_medsos[facebook]">Facebook</label>
+            <input type="text" name="kontak_medsos[facebook]" id="kontak_medsos[facebook]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="kontak_medsos[lain_lain]">Lain-lain</label>
+            <input type="text" name="kontak_medsos[lain_lain]" id="kontak_medsos[lain_lain]" class="form-control">
+        </div>
+
+        <!-- Add other fields for Kontak & Medsos -->
+
+        <!-- Pendidikan Section -->
+        <h3>Pendidikan</h3>
+        <div class="form-group">
+            <label for="pendidikan[tk_paud]">TK / PAUD - Nama Sekolah & Periode Waktu</label>
+            <input type="text" name="pendidikan[tk_paud]" id="pendidikan[tk_paud]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="pendidikan[sd]>">SD - Nama Sekolah & Periode Waktu</label>
+            <input type="text" name="pendidikan[sd]" id="pendidikan[sd]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="pendidikan[smp]>">SMP - Nama Sekolah & Periode Waktu</label>
+            <input type="text" name="pendidikan[smp]" id="pendidikan[smp]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="pendidikan[sma]>">SMA - Nama Sekolah & Periode Waktu</label>
+            <input type="text" name="pendidikan[sma]" id="pendidikan[sma]" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="pendidikan[beasiswa_parousia]">Beasiswa Parousia</label>
+            <select name="pendidikan[beasiswa_parousia]" id="pendidikan[beasiswa_parousia]" class="form-control" onchange="toggleBeasiswaFields()">
+            <option value="Yes">Ya</option>
+            <option value="No">Tidak</option>
+            </select>
+        </div>
+        <div id="beasiswa_fields" style="display: none;">
+            <div class="form-group">
+            <label for="pendidikan[beasiswa_parousia_periode_waktu]">Periode Waktu</label>
+            <input type="text" name="pendidikan[beasiswa_parousia_periode_waktu]" id="pendidikan[beasiswa_parousia_periode_waktu]" class="form-control">
+            </div>
+        </div>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            var beasiswaSelect = document.getElementById('beasiswa_parousia');
+            var defaultOption = document.createElement('option');
+            defaultOption.text = 'Pilih';
+            defaultOption.value = '';
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            beasiswaSelect.add(defaultOption, beasiswaSelect.options[0]);
+            });
+        </script>
+
+        
+        <script>
+            function toggleBeasiswaFields() {
+            var beasiswaSelect = document.getElementById('beasiswa_parousia');
+            var beasiswaFields = document.getElementById('beasiswa_fields');
+            if (beasiswaSelect.value === 'Yes') {
+                beasiswaFields.style.display = 'block';
+            } else {
+                beasiswaFields.style.display = 'none';
+            }
+            }
+        </script>
+
+
+
+    
+        <!-- Add other fields for Pendidikan -->
+
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+</div>
+@endsection
